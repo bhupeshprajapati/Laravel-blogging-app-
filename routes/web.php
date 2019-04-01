@@ -17,3 +17,9 @@
 Route::get('/', 'PagesController@index');//after @ it is the functin name in the controller--check
 Route::get('/about', 'PagesController@about');//after @ about is the functin name in the controller--check
 Route::get('/services', 'PagesController@services');
+
+Route::resource('posts','PostsController');//it creates routes to all teh functions we created in PostsController using --resource
+Route::post('/create','PostsController@posts');
+Auth::routes();
+
+Route::get('/dashboard', 'DashboardController@index');
