@@ -13,10 +13,32 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                     <a href="/posts/create" class="btn btn-primary">Create Post</a>   
+                     <a href="/posts/create" class="btn btn-primary">Create Post</a> <br><br>  
                     You are logged in!
                 </div>
+
             </div>
+            <br>
+            @if(count($posts) > 0)
+            <div class="list-group-item">
+            <table class="table table-striped">
+                <tr>
+                    <th>Title</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                @foreach( $posts as $post )
+                    <tr>
+                       <th>{{$post->title}}</th>
+                       <th><a href="/posts/{{$post->id}}/edit" class="btn btn-default">Edit</a></th>
+                        <th></th>
+                    </tr>
+                @endforeach
+            </table>
+            </div>
+            @else
+                <p>You have no Posts !</p>
+            @endif
         </div>
     </div>
 </div>
