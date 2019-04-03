@@ -23,3 +23,4 @@ Route::post('/create','PostsController@posts');
 Auth::routes();
 
 Route::get('/dashboard', 'DashboardController@index');
+Route::post('/posts/destroy','PostsController@destroy');

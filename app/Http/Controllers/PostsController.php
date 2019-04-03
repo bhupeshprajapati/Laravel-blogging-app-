@@ -129,7 +129,7 @@ class PostsController extends Controller
     {
         $this->validate($request,[
             'title'=> 'required',
-            'body'=> 'required'   
+            'body'=> 'required',  
            ]);
 
            
@@ -147,16 +147,17 @@ class PostsController extends Controller
             $path = $request->file('cover_image')->storeAs('public/cover_images', $fileNameToStore);
         }
 
-           //Create Post
-           $post = new Post;
+           //Update Post
+           $id = $request->input('id');
+           $post = Post::find($id);
            $post->title = $request->input('title');
            $post->body =$request ->input('body');
            if($request->hasFile('cover_image')){
                $post->cover_image = $fileNameToStore;
            }
            $post->save();
-           return redirect('/posts')->with('success','Post Submitted');
-          
+           return redirect('/posts')->with('success','Post Updated');
+           
     }
 
     /**
@@ -165,8 +166,9 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
+        $id= $request->input('id');
         $post =Post::find($id);
         
         //Check for correct user
